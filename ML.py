@@ -21,7 +21,10 @@ Y = np.empty(n)
 for i in range(0,n):
     X[i]=data.iloc[i*50:(i+1)*50,2:5]
     Y[i]=data.iloc[i*50,5]
-    
+print("Training data input:")
+print(X)
+print("Training data results:")
+print(Y)
 from sklearn.model_selection import train_test_split
 X_train, X_test,Y_train, Y_test = train_test_split(X,Y, test_size=0.3,random_state=8, shuffle=True)
 X_train.shape
@@ -53,7 +56,7 @@ for i in range(k):
     
     model = get_model()
     
-    model.fit(X_train_,Y_train_,epochs=12)
+    model.fit(X_train_,Y_train_,epochs=64)
     scores = model.evaluate(X_val, Y_val)
     avg_scores.append(scores)
 
@@ -63,3 +66,4 @@ model.fit(X_train,Y_train,epochs=64)
 score=model.evaluate(X_test,Y_test)
 print(model.metrics_names[1])
 score[1]
+model.save('AI.model')
